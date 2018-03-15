@@ -1,3 +1,5 @@
+
+
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "-----------"
@@ -14,34 +16,37 @@ end
 
 
 def turn(board)
+  puts "Please enter 1-9:"
+  input = gets.strip
+  index = input_to_index(input)
 
-puts "Please enter 1-9:"
-input = gets.strip
-index = input_to_index(input)
-
-valid_move?(board, index)
-
-
+  if valid_move?(board, index)
+    binding.pry
+    move(board, index)
+    display_board(board)
+  else
+    puts "invalid"
+    turn(board)
+  end
 end
 
 def position_taken?(board, index)
 
-if board[index] == " " || board[index] == "" || board[index] == nil
-  return false
-else
-  return true
-
-end
+  if board[index] == " " || board[index] == "" || board[index] == nil
+    return false
+  else
+    return true
+  end
 end
 
 def valid_move?(board, index)
 
-index.between?(0,8) && !position_taken?(board, index)
-
+  index.between?(0,8) && !position_taken?(board, index)
 
 end
+
 def input_to_index(user_input)
 
-user_input.to_i - 1
+   user_input.to_i - 1
 
 end
